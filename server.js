@@ -1,14 +1,14 @@
-var express = require('express');
-var moment = require('moment');
+const express = require('express');
+const moment = require('moment');
 
-var app = express();
+const app = express();
 
 
 app.get('/:timestamp', function (req, res) {
-    var timestamp = req.params.timestamp;
+    let timestamp = req.params.timestamp;
 
-    var unix = null;
-    var natural = null;
+    let unix = null;
+    let natural = null;
 
     if (moment.unix(timestamp).isValid()) {
         unix = moment(Number(timestamp)).unix();
@@ -30,7 +30,7 @@ app.get('/:timestamp', function (req, res) {
         unix = moment(timestamp, 'MM/DD/YYYY').unix();
         natural = moment(timestamp, 'MM/DD/YYYY').format("MMMM Do, YYYY");
     }
-    
+
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
         "unix": unix,
